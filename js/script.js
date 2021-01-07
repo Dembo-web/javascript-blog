@@ -132,7 +132,7 @@ function generateTags(){
 
       /*[DONE] generate HTML of the link */
 
-      const tagHTML = '<li><a href="#tag-"><span>' + tag + '</span></a></li> ';
+      const tagHTML = '<li><a href="#tag-' + tag +'"><span>' + tag + '</span></a></li> ';
 
       /* [DONE] add generated code to html variable */
 
@@ -226,6 +226,8 @@ addClickListenersToTags();
 
 
 function generateAuthors(){
+
+
 
 
 }
