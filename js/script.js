@@ -52,7 +52,8 @@ const titleClickHandler = function(event){
 const optArticleSelector = '.post',
   optTitleSelector = '.post-title',
   optTitleListSelector = '.titles',
-  optArticleTagsSelector = '.post-tags .list';
+  optArticleTagsSelector = '.post-tags .list',
+  optAuthorsSelector= '.post-author';
 
 function generateTitleLinks(customSelector = ''){
 
@@ -205,7 +206,7 @@ function tagClickHandler(event){
 }
 
 function addClickListenersToTags(){
-  /* find all links to tags */
+  /* [DONE] find all links to tags */
 
   const linkTag = document.querySelectorAll('a[href^="#tag-"]');
 
@@ -227,7 +228,67 @@ addClickListenersToTags();
 
 function generateAuthors(){
 
+  /* [DONE] find authors wrapper */
 
+  const articles = document.querySelectorAll(optArticleSelector);
 
+  for(let article of articles){
+
+    const authorsWrapper = article.querySelector(optAuthorsSelector);
+
+    let html = '';
+
+    const articleAuthor = article.getAttribute('data-author');
+
+    const linkHTML =  '<a href="#author-' + articleAuthor +'"><span>' + articleAuthor +'</span></a>';
+
+    html = html + linkHTML;
+
+    authorsWrapper.innerHTML = html;
+
+  }
+}
+
+generateAuthors();
+
+function authorClickHandler(event){
+
+  event.preventDefault();
+
+  const clickedElement = this;
+
+  const href = clickedElement.getAttribute('href');
+
+  const author = href.replace('#author-', '');
+
+  const activeAuthorLinks = document.querySelectorAll('a.active[href^="#author-"]');
+
+  for(let activeAuthorLink of activeAuthorLinks){
+
+    activeAuthorLink.classList.remove('active');
+
+  }
+
+  const authorHrefLinks = document.querySelectorAll('a[href="'+ href +'"]');
+
+  for (let authorHrefLink of authorHrefLinks){
+
+    authorHrefLink.classList.add('active');
+  }
+
+  generateTitleLinks('[data-tags~="'+ author + '"]');
 
 }
+
+function addClicklListenerToAuthors(){
+
+  const linkAuthor = document.querySelectorAll('a[href^="#author"]');
+
+  for(let linkAuthors of linkAuthor){
+
+    linkAuthors.addEventListener('click',authorClickHandler);
+  }
+
+}
+
+addClicklListenerToAuthors();
