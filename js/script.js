@@ -361,11 +361,12 @@ function authorClickHandler(event){
 
   for(let activeAuthorLink of activeAuthorLinks){
 
+
     activeAuthorLink.classList.remove('active');
 
   }
 
-  const authorHrefLinks = document.querySelectorAll('a[href="'+ href +'"]');
+  const authorHrefLinks = document.querySelectorAll('a[href="'+ author +'"]');
 
   for (let authorHrefLink of authorHrefLinks){
 
