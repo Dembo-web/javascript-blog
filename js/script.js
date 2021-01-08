@@ -105,7 +105,7 @@ generateTitleLinks();
 
 function generateTags(){
 
-  let allTags = [];
+  let allTags = {};
 
   /* [DONE] find all articles */
 
@@ -143,9 +143,12 @@ function generateTags(){
 
       html = html + tagHTML;
 
-      if(allTags.indexOf(tagHTML) == -1){
-        allTags.push(tagHTML);
+      if(!allTags[tag]){
+        allTags[tag] = 1;
+      } else {
+        allTags[tag]++;
       }
+
 
     /* [DONE] END LOOP: for each tag */
     }
@@ -158,7 +161,17 @@ function generateTags(){
 
   const tagList = document.querySelector('.tags');
 
-  tagList.innerHTML = allTags.join(' ');
+  /* [NEW] create variable for all links HTML code */
+  let allTagsHTML = '';
+
+  /* [NEW] START LOOP: for each tag in allTags: */
+  for(let tag in allTags){
+    /* [NEW] generate code of a link and add it to allTagsHTML */
+    allTagsHTML += '<li><a href="#tag-' + tag +'"><span>' + tag + '</span></a>' + '(' + allTags[tag] + ')' + '</li>';
+  /* [NEW] END LOOP: for each tag in allTags: */
+  }
+  /*[NEW] add HTML from allTagsHTML to tagList */
+  tagList.innerHTML = allTagsHTML;
 
 }
 
