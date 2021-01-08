@@ -53,7 +53,8 @@ const optArticleSelector = '.post',
   optTitleSelector = '.post-title',
   optTitleListSelector = '.titles',
   optArticleTagsSelector = '.post-tags .list',
-  optAuthorsSelector= '.post-author';
+  optAuthorsSelector= '.post-author',
+  optTagsListSelector = '.tag-list';
 
 function generateTitleLinks(customSelector = ''){
 
@@ -103,6 +104,9 @@ function generateTitleLinks(customSelector = ''){
 generateTitleLinks();
 
 function generateTags(){
+
+  let allTags = [];
+
   /* [DONE] find all articles */
 
   const articles = document.querySelectorAll(optArticleSelector);
@@ -139,6 +143,10 @@ function generateTags(){
 
       html = html + tagHTML;
 
+      if(allTags.indexOf(tagHTML) == -1){
+        allTags.push(tagHTML);
+      }
+
     /* [DONE] END LOOP: for each tag */
     }
     /* [DONE] insert HTML of all the links into the tags wrapper */
@@ -147,6 +155,11 @@ function generateTags(){
 
   /* [DONE] END LOOP: for every article: */
   }
+
+  const tagList = document.querySelector('.tags');
+
+  tagList.innerHTML = allTags.join(' ');
+
 }
 
 generateTags();
