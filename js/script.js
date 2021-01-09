@@ -339,6 +339,7 @@ function generateAuthors(){
     for(let author in allAuthors){
       const authorLinkHTML = '<li><a href="#author-' + author + '">' + author + '</a>' + '(' + allAuthors[author] + ')' + '</li>';
       allAuthorsHTML += authorLinkHTML;
+
     }
     authorsList.innerHTML = allAuthorsHTML;
 
@@ -373,7 +374,7 @@ function authorClickHandler(event){
     authorHrefLink.classList.add('active');
   }
 
-  generateTitleLinks('[data-tags~="'+ author + '"]');
+  generateTitleLinks('[data-author="'+ author + '"]');
 
 }
 
